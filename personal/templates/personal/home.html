@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>teXen - sense your word</title>
+    {% load staticfiles %}
+    <link rel="icon" href="{% static 'img/logo.jpg' %}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/grayscale.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/my_css.css'%}" rel="stylesheet">
+
+
+</head>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">teXen</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#projects">Feature</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#signup">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+        <div class="container d-flex h-100 align-items-center">
+            <div class="mx-auto text-center">
+                <h1 class="mx-auto my-0 text-uppercase">teXen</h1>
+                <h2 class="text-white-50 mx-auto mt-2 mb-5">sense your words</h2>
+                <div>
+                    {% csrf_token %}
+                    <input id="urlTextField" name="url" type="text" placeholder="input YouTube URL here" required>
+                    <p id="errorMsg" style="color: darkred">Please input the correct YouTube URL</p>
+                    <!--                    <button href="#result" id="submitBtn" class="btn btn-primary js-scroll-trigger">Submit</button>-->
+
+                    <a id="submitBtn" style="background-color: #202020 " href="#result" class="btn btn-primary js-scroll-trigger">Submit</a>
+
+                </div>
+                <!--          <a href="#about" class="btn btn-primary js-scroll-trigger">Get Started</a>-->
+            </div>
+        </div>
+    </header>
+
+    <section id="result" class="text-center" style="padding-top: 2rem; height: 100%; background: linear-gradient(to bottom,#161616 0,rgba(22,22,22,.9) 75%,rgba(22,22,22,.8) 100%)">
+        <div id="resultContainer">
+            <h2 class="text-white mb-4">Result</h2>
+            <div class="row">
+
+                <div class="col-lg-6 mx-auto">
+
+                    <p id="dispUrl" class="text-white-50">Here is your video</p>
+                    <iframe id="videoDisp" width="80%" height="345">
+                    </iframe>
+<!--                    <p id="dispResult" class="text-white-50">YouTube Comment shows here</p>-->
+                </div>
+                <div class="col-lg-4 mx-auto" style="justify-content: center; align-items: center; padding-top: 6%" width = 100%>
+                    <div class="loader" style="display: table; margin: 0 auto"></div>
+                    <div id="pieContainer" style="display: flex; padding-left: 40px">
+                        <div class="col_lg-8" id="pie"></div>
+                        <div class="col-lg-4" id="pieInfo" style="align-items: center; padding: 20% 0 0 40px; text-align: left">
+                            <div style="color: #06DB85">&#9632 positive</div>
+                            <div style="color: #FB6794">&#9632 negative</div>
+                        </div>
+                    </div>
+                    <div id="pieSaticfaction" style="margin-bottom: 30%">
+                        <p style="color: white">
+                            Not satisfy?
+                            <a class="js-scroll-trigger" href="#trainSection" style="font-style: italic; color: aqua">click here</a> to sense some sentences
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--            <img src="{% static 'img/ipad.png' %}" class="img-fluid" alt="">-->
+        </div>
+    </section>
+
+    <section id="trainSection" class="about-section text-center" style="padding-top: 4rem; height: 100%; background: linear-gradient(to top,#161616 0,rgba(22,22,22,.9) 75%,rgba(22,22,22,.8) 100%)">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 mx-auto">
+                    <form id="commentContainer" method="POST">
+                        <h2 class="text-white mb-4">Make us better</h2>
+                        <div class="commentRow text-white-50">
+                            <div class="commentText"></div>
+                            <div class="col lg-8">
+                                <label class="radio-inline"><input type="radio" name="optradio">Positive</label>
+                                <label class="radio-inline"><input type="radio" name="optradio">Negative</label>
+                                <label class="radio-inline"><input type="radio" name="optradio">Neutral</label>
+                            </div>
+                            <br>
+                        </div>
+                        <button id="submitTrainData" class="btn btn-primary js-scroll-trigger">Submit Data</button>
+                        <br><br><br><br>
+                    </form>
+                </div>\
+            </div>
+            <!--            <img src="{% static 'img/ipad.png' %}" class="img-fluid" alt="">-->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-white mb-4">About us</h2>
+                    <p class="text-white-50">This web-app can analyze sentiment of your YouTube video comment by 91% accuracy. Feel free to be part of us by give some sense of new sentence</p>
+                </div>
+            </div>
+            <img src="{% static 'img/ipad.png' %}" class="img-fluid" alt="">
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section bg-light">
+        <div class="container">
+
+            <!-- Featured Project Row -->
+            <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+                <div class="col-xl-8 col-lg-7">
+                    <img class="img-fluid mb-3 mb-lg-0" src="{% static 'img/bg-masthead.jpg' %}" alt="">
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="featured-text text-center text-lg-left">
+                        <h4>Learning</h4>
+                        <p class="text-black-50 mb-0">Use our app and sense more sentence</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Signup Section -->
+    <section id="signup" class="signup-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+
+                    <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                    <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
+
+                    <form class="form-inline d-flex">
+                        <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
+                        <button type="submit" class="btn btn-primary mx-auto">Subscribe</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section bg-black">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                            <h4 class="text-uppercase m-0">Address</h4>
+                            <hr class="my-4">
+                            <div class="small text-black-50">Pakuan 3 st., BCA Learning Institute</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-envelope text-primary mb-2"></i>
+                            <h4 class="text-uppercase m-0">Email</h4>
+                            <hr class="my-4">
+                            <div class="small text-black-50">
+                                <a href="#">cemungudh_ai@texen.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                            <h4 class="text-uppercase m-0">Phone</h4>
+                            <hr class="my-4">
+                            <div class="small text-black-50">+1 +62 815 4648 7711</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social d-flex justify-content-center">
+                <a href="#" class="mx-2">
+            <i class="fab fa-twitter"></i>
+          </a>
+                <a href="#" class="mx-2">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+                <a href="#" class="mx-2">
+            <i class="fab fa-github"></i>
+          </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black small text-center text-white-50">
+        <div class="container">
+            Copyright &copy; teXen 2018
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'vendor/font-awesome/js/all.js' %}"></script>
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'js/grayscale.min.js' %}"></script>
+
+    <script src="{% static 'js/validation.js' %}"></script>
+
+    <!-- piechart   -->
+    <!--    <script src="//code.jquery.com/jquery-3.2.0.min.js"></script>-->
+    <script src="{% static 'js/jquery.rotapie.js' %}"></script>
+    <script>
+        $(function() {
+            $('#pie').rotapie({
+                slices: [{
+                        color: '#06DB85',
+                        percentage: 10
+                    }, // If color not set, slice will be transparant.
+                    {
+                        color: '#FB6794',
+                        percentage: 30
+                    }, // Font color to render percentage defaults to 'color' but can be overriden by setting 'fontColor'.
+                    {
+                        color: '#EFD909',
+                        percentage: 60
+                    }
+                ],
+                sliceIndex: 0, // Start index selected slice.
+                deltaAngle: 0.2, // The rotation angle in radians between frames, smaller number equals slower animation.
+                minRadius: 100, // Radius of unselected slices, can be set to percentage of container width i.e. '50%'
+                maxRadius: 110, // Radius of selected slice, can be set to percentage of container width i.e. '45%'
+                minInnerRadius: 55, // Smallest radius inner circle when animated, set to 0 to disable inner circle, can be set to percentage of container width i.e. '35%'
+                maxInnerRadius: 65, // Normal radius inner circle, set to 0 to disable inner circle, can be set to percentage of container width i.e. '30%'
+                innerColor: '#fff', // Background color inner circle. 
+                minFontSize: 30, // Smallest fontsize percentage when animated, set to 0 to disable percentage display, can be set to percentage of container width i.e. '20%'
+                maxFontSize: 40, // Normal fontsize percentage, set to 0 to disable percentage display, can be set to percentage of container width i.e. '10%'
+                fontYOffset: 0, // Vertically offset the percentage display with this value, can be set to percentage of container width i.e. '-10%'
+                fontFamily: 'Times New Roman', // FontFamily percentage display.
+                fontWeight: 'bold', // FontWeight percentage display.
+                decimalPoint: '.', // Can be set to comma or other symbol.
+                clickable: true // If set to true a user can select a different slice by clicking on it. 
+                /*
+                beforeAnimate: function (nextIndex, settings) {
+                    var canvas = this;
+                    return false; // Cancel rotation
+                },
+                afterAnimate: function(settings){
+                    var canvas = this;
+                    var index = settings.sliceIndex; // Retrieve current index.
+                }
+                */
+            });
+        });
+
+    </script>
+
+    <script>
+        $('#submitBtn').click(function() {
+            //            $('#dispUrl').text($('#urlTextField').val())
+            $('#resultContainer').show()
+            
+            $('#trainSection').show()
+            $('.loader').show()
+            $('#pieContainer').hide()
+            $('#pieSaticfaction').hide()
+            var urlPattern = /^(https?:\/\/)?(?:www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/|v\/|.+\?v=)?((\w|-){11})(?:\S+)?$/;
+            var youtubeUrl = new RegExp(urlPattern)
+            $('#videoDisp').attr('src','https://www.youtube.com/embed/'+$('#urlTextField').val().match(youtubeUrl)[5])
+            $.ajax({
+                method: "POST",
+                url: "/result/",
+                data: {
+                    url: $('#urlTextField').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function(response) {
+                    console.log(response)
+//                    $('#dispUrl').text(response.videoTitle)
+//                    $('#videoDisp').attr('src','https://www.youtube.com/embed/'+response.videoID)
+//                    $('#dispResult').text(response.sentimentPos)
+                    sentimentPos = parseInt(response.sentimentPos)
+                    sentimentNeg = parseInt(response.sentimentNeg)
+                    //                    sentimentNeu = parseInt(response.sentimentNeu)
+                    sampleSize = sentimentPos + sentimentNeg
+//                    for (i = 1; i < 5; i++) {
+//                        
+//                        $('.commentRow').remove()
+//                        
+//                        //                        console.log('hai')
+//                    }
+
+                    for (i = 1; i < 5; i++) {
+                        var $trainComment = $('.commentRow').first().clone()
+                        $trainComment.find('[type=radio]').attr('name', 'optradio' + i)
+                        $('.commentRow').last().after($trainComment)
+                        $('<p class="commentTextDisp" style="margin: 0">' + response.commentSample[i] + '</p>').appendTo($('.commentText').last())
+                        //                        console.log('hai')
+                    }
+                    $('<p class="commentTextDisp" style="margin: 0">' + response.commentSample[0] + '</p>').appendTo($('.commentText').first())
+
+                    posPercentage = ((sentimentPos / sampleSize) * 100).toFixed(1)
+                    negPercentage = ((sentimentNeg / sampleSize) * 100).toFixed(1)
+                    //                    neuPercentage = ((sentimentNeu / sampleSize) * 100).toFixed(1)
+
+                    //                    iAnimate = 0
+                    //                    while(iAnimate < posPercentage){
+                    //                        console.log(posPercentage, iAnimate)
+                    if(posPercentage > negPercentage){
+                        $('#pie').rotapie({
+                            slices: [{
+                                    color: '#06DB85',
+                                    percentage: parseFloat(posPercentage)
+                                }, // pos
+                                {
+                                    color: '#FB6794',
+                                    percentage: parseFloat(negPercentage)
+                                }, // neg
+                                {
+                                    color: '#EFD909',
+                                    percentage: 0
+                                } // neu
+                            ],
+                        });
+                    }
+                    else{
+                        $('#pie').rotapie({
+                            slices: [{
+                                    color: '#FB6794',
+                                    percentage: parseFloat(negPercentage)
+                                }, // neg
+                                {
+                                    color: '#06DB85',
+                                    percentage: parseFloat(posPercentage)
+                                }, // pos
+                                {
+                                    color: '#EFD909',
+                                    percentage: 0
+                                } // neu
+                            ],
+                        });
+                    }
+                    $('#pieContainer').show()
+                    $('.loader').hide()
+                    $('#pieSaticfaction').show()
+                    //                        iAnimate += 0.1
+                    //                        iAnimate = iAnimate.toFixed(1)
+                    //                    }
+                }
+            })
+        });
+
+    </script>
+
+</body>
+
+</html>
